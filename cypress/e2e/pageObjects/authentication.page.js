@@ -63,6 +63,26 @@ class Login {
         return ('.auth0-lock-terms span');
     }
 
+    get invalidSignupErrorMessage(){
+        return ('.animated span');
+    }
+
+    get emailInvalidMessage(){
+        return ('.auth0-lock-error-invalid-hint');
+    }
+
+    get emailError(){
+        return ('#auth0-lock-error-msg-email');
+    }
+
+    get passwordError(){
+        return ('#auth0-lock-error-msg-password');
+    }
+
+    get signupTab(){
+        return ('ul.auth0-lock-tabs > li:nth-child(2) a');
+    }
+
     get btnSignup() {
         return ('span.auth0-label-submit');
     }
@@ -84,6 +104,10 @@ class Login {
     //method to signup
     signup(email, password) {
 
+        //click the signupOrRegister button
+        cy.get(this.btnSigninOrRegister).click();
+        //click the signup tab
+        cy.get(this.signupTab).click();
         //enter signup details
         cy.get(this.emailTextField).type(email);
         cy.get(this.passwordTextField).type(password);

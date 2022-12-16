@@ -1,5 +1,5 @@
-import Login from '../pageObjects/authentication.page';
-import loginData, { login } from '../data/authentication.data';
+import Authentication from '../pageObjects/authentication.page';
+import loginData from '../data/authentication.data';
 const {faker} = require('@faker-js/faker');
 
 describe('The user', () => {
@@ -12,53 +12,62 @@ describe('The user', () => {
     it('should be able to login successfully', () => {
         
         //log in with valid credential
-        Login.login(loginData.login.email, loginData.login.password);
+        Authentication.login(loginData.login.email, loginData.login.password);
         //sign out after successful login
-        Login.signout();
+        Authentication.signout();
     });
 
     it('should not login with invalid email credentials', () => {
 
         //log in with invalid credential
-        Login.login(faker.internet.email(), loginData.login.password);
+        Authentication.login(faker.internet.email(), loginData.login.password);
         //asserting the invalid credential
-        cy.get(Login.invalidLoginErrorMessage).should('have.text', loginData.login.errorMessage);
+        cy.get(Authentication.invalidLoginErrorMessage).should('have.text', loginData.login.errorMessage);
     });
 
     it('should not login with invalid password credentials', () => {
 
         //log in with invalid credential
-        Login.login(loginData.login.email, faker.internet.password());
+        Authentication.login(loginData.login.email, faker.internet.password());
         //asserting the invalid credential
-        cy.get(Login.invalidLoginErrorMessage).should('have.text', loginData.login.errorMessage);
+        cy.get(Authentication.invalidLoginErrorMessage).should('have.text', loginData.login.errorMessage);
     });
 
     it('should allow users to signup with valid credentials', () => {
         
         //sign up with valid credential
-        Login.login(loginData.signup.email, loginData.signup.password);
+        Authentication.login(loginData.signup.email, loginData.signup.password);
         //sign out after successful login
-        Login.signout();
+        Authentication.signout();
     });
 
-    //should not signup with invalid email credential
-    it('should not allow users to signup with invalid email credential', () => {
+    //should not signup with existing email 
+    it('should not allow users to signup with existing email', () => {
 
         //insert invalid email
-        login.login(faker.internet.email(), loginData.signup.password);
-
-        //check if the details entered exist already from saved signup.data.json file
-
-
+        Authentication.signup(loginData.signup.email, faker.internet.password());
+        //asserting already existing credential
+        cy.get(Authentication.invalidSignupErrorMessage).should('have.text', loginData.signup.errorMessage);
     });
 
-    //should not signup with invalid password credential
-    // it('should not allow users to signup with invalid password credential', () => {
+    //check for invalid email
+    it('should not signup with invalid email', () => {
 
-    //insert invalid email
-    //login.login(loginData.signup.email, faker.internet.password(), );
+        //insert invalid email
+        Authentication.signup(loginData.signup.wrongFormatEmail, faker.internet.password());
+        //assert the correct email format
+        cy.get(Authentication.emailInvalidMessage).should('have.text', loginData.signup.emailInvalidMessage);
+    });
 
-     //check if the details entered exist already from saved signup.data.json file
+    //check for emtpy fields
+    it('should not signup with empty fields', () => {
 
-    // });
+        cy.get(Authentication.btnSigninOrRegister).click();
+        cy.get(Authentication.btnLogIn).click();
+
+        cy.get(Authentication.emailError).should('have.text', loginData.signup.emptyEmailField);
+        cy.get(Authentication.passwordError).should('have.text', loginData.signup.emptyPasswordField);
+    });
+
+  
 });
