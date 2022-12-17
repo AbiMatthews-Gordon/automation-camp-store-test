@@ -1,7 +1,6 @@
 import Authentication from '../pageObjects/authentication.page';
 import loginData from '../data/authentication.data';
 import addToCartPage from '../pageObjects/add-to-cart.page';
-import { login } from '../data/authentication.data';
 import routesData from '../data/routes.data';
 import productsData from '../data/products.data.json';
 
