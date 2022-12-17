@@ -64,6 +64,7 @@ class Products{
         return ('.snipcart-button-secondary');
     }
 
+
     //cart selectors
     get increaseCartBtn(){
         return ('[aria-label="Increment quantity"]');
@@ -71,6 +72,26 @@ class Products{
 
     get decreaseCartBtn(){
         return ('[aria-label="Decrement quantity"]');
+        
+    get allProductPrice(){
+        return ('.chakra-container:nth-child(2) > div:nth-child(3) > .chakra-stack >div:nth-child(2) >div:first-child >div:nth-child(3) p');
+    }
+
+    get allProductName(){
+        return ('.chakra-container:nth-child(2) > div:nth-child(3) > .chakra-stack >div:nth-child(2) >div:first-child >div:nth-child(1) p');
+    }
+
+    //search & category selectors
+    get searchTextField(){
+        return ('#search');
+    }
+
+    get productName(){
+        return ('.css-1oeb4ru > .chakra-text');
+    }
+
+    get qualityFittedHat(){
+        return ('#product-0 > .css-n21gh5 > .css-46p1lt > .css-1oeb4ru > .chakra-text');
     }
 
     selectSort(sort) {
