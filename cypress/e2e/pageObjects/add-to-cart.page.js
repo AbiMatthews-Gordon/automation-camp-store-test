@@ -64,6 +64,15 @@ class Products{
         return ('.snipcart-button-secondary');
     }
 
+
+    //cart selectors
+    get increaseCartBtn(){
+        return ('[aria-label="Increment quantity"]');
+    }
+
+    get decreaseCartBtn(){
+        return ('[aria-label="Decrement quantity"]');
+        
     get allProductPrice(){
         return ('.chakra-container:nth-child(2) > div:nth-child(3) > .chakra-stack >div:nth-child(2) >div:first-child >div:nth-child(3) p');
     }
