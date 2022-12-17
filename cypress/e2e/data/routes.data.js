@@ -8,7 +8,8 @@ module.exports = {
         order: '/contact#/order/',
         cartSummary: '/products#/cart',
         productDetail: '/products/quality-hat-model',
-        relatedProductDetail: '/products/quality-hat'
+        relatedProductDetail: '/products/quality-hat',
+        favourites: '/favorites'
     }
 
 }
