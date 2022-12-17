@@ -5,7 +5,8 @@ module.exports = {
         contacts: '/contact',
         cart: '/contact#/cart',
         checkout: '/contact#/checkout',
-        order: '/contact#/order/'
+        order: '/contact#/order/',
+        cartSummary: '/products#/cart'
     }
 
 }
