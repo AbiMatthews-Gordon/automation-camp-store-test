@@ -11,7 +11,7 @@
         "Pants": "pant",
         "Hats": "hat",
         "Shoes": "shoes",
-        "Couch/Sofa": "co/so",
-        "Laptops": "lato"
+        "Couch/Sofa": "couch",
+        "Laptops": "laptop"
     }
 }
