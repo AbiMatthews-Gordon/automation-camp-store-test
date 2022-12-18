@@ -5,7 +5,7 @@ import { productsList } from '../data/products.data.json';
 import productPage from '../pageObjects/add-to-cart.page'
 import addToCartPage from '../pageObjects/add-to-cart.page';
 
-describe('Sort', () => {
+describe('Verify that the user ', () => {
 
     beforeEach(() => {
 
@@ -14,7 +14,7 @@ describe('Sort', () => {
         Authentication.login(loginData.login.email, loginData.login.password);
     });
 
-    it('should sort product list from low to high', () => {
+    it('is able to sort product list from low to high', () => {
 
         //changing drop down value
         productPage.selectSort(sort['Low to High']);
@@ -33,7 +33,7 @@ describe('Sort', () => {
         });
     });
 
-    it('should sort product list from high to low', () => {
+    it('is able to sort product list from high to low', () => {
         
         //changing drop down value
         productPage.selectSort(sort['High to Low']);
@@ -52,7 +52,7 @@ describe('Sort', () => {
         });
     });
 
-    it('should sort product list from A-Z', () => {
+    it('is able to sort product list from A-Z', () => {
 
         //changing drop down value
         productPage.selectSort(sort['A to Z']);
@@ -78,7 +78,7 @@ describe('Sort', () => {
         });
     });
 
-    it('should sort product list from Z-A', () => {
+    it('is able to sort product list from Z-A', () => {
 
          //changing drop down value
         productPage.selectSort(sort['Z to A']);
@@ -105,7 +105,7 @@ describe('Sort', () => {
         })
     });
 
-    it('should be able to reset the products', () => {
+    it('is able to reset the products on the page', () => {
 
         //changing drop down value
         productPage.selectSort(sort['Low to High']);
