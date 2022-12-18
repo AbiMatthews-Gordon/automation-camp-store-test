@@ -2,14 +2,14 @@ import Authentication from '../pageObjects/authentication.page';
 import loginData from '../data/authentication.data';
 const {faker} = require('@faker-js/faker');
 
-describe('The user', () => {
+describe('Verify that the user ', () => {
 
     //this hook runs before each test
     beforeEach(() => {
         cy.visit("");
     });
 
-    it('should be able to login successfully', () => {
+    it('is able to login successfully with valid email and password', () => {
         
         //log in with valid credential
         Authentication.login(loginData.login.email, loginData.login.password);
@@ -17,7 +17,7 @@ describe('The user', () => {
         Authentication.signout();
     });
 
-    it('should not login with invalid email credentials', () => {
+    it('is not able to login with invalid email credentials', () => {
 
         //log in with invalid credential
         Authentication.login(faker.internet.email(), loginData.login.password);
@@ -25,7 +25,7 @@ describe('The user', () => {
         cy.get(Authentication.invalidLoginErrorMessage).should('have.text', loginData.login.errorMessage);
     });
 
-    it('should not login with invalid password credentials', () => {
+    it('is not able to login with incorrect password credentials', () => {
 
         //log in with invalid credential
         Authentication.login(loginData.login.email, faker.internet.password());
@@ -33,7 +33,7 @@ describe('The user', () => {
         cy.get(Authentication.invalidLoginErrorMessage).should('have.text', loginData.login.errorMessage);
     });
 
-    it('should allow users to signup with valid credentials', () => {
+    it('is able to signup with valid email and password', () => {
         
         //sign up with valid credential
         Authentication.login(loginData.signup.email, loginData.signup.password);
@@ -42,7 +42,7 @@ describe('The user', () => {
     });
 
     //should not signup with existing email 
-    it('should not allow users to signup with existing email', () => {
+    it('is not able to signup with an existing email', () => {
 
         //insert invalid email
         Authentication.signup(loginData.signup.email, faker.internet.password());
@@ -51,7 +51,7 @@ describe('The user', () => {
     });
 
     //check for invalid email
-    it('should not signup with invalid email', () => {
+    it('is not able to signup with invalid email ', () => {
 
         //insert invalid email
         Authentication.signup(loginData.signup.wrongFormatEmail, faker.internet.password());
@@ -60,7 +60,7 @@ describe('The user', () => {
     });
 
     //check for emtpy fields
-    it('should not signup with empty fields', () => {
+    it('is not able to signup with empty input fields', () => {
 
         cy.get(Authentication.btnSigninOrRegister).click();
         cy.get(Authentication.btnLogIn).click();
