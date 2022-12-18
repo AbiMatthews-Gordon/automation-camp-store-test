@@ -17,8 +17,6 @@ describe('Verify that the user', () => {
 
         //check if url is products url
         cy.url().should('include', routesData.routes.products);
-        //click in the search field
-        cy.get(addToCartPage.searchTextField).click();
         //enter a product name
         cy.get(addToCartPage.searchTextField).type(productsList[1].name);
         //verify that the product appeared
@@ -30,9 +28,7 @@ describe('Verify that the user', () => {
 
         //check if url is products url
         cy.url().should('include', routesData.routes.products);
-        //click in the search field
-        cy.get(addToCartPage.searchTextField).click();
-        //enter a product cat
+        //enter a product category
         cy.get(addToCartPage.searchTextField).type(productsList[1].category);
 
         //verify that the product appeared
@@ -52,5 +48,4 @@ describe('Verify that the user', () => {
         cy.get(addToCartPage.qualityTruckerHat).should('not.exist');
         
     });
-
 });

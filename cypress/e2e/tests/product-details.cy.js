@@ -35,18 +35,6 @@ describe('Verify that the user ', () => {
         cy.get(productDetailsPage.productDetailImageTwo).click();
     });
 
-    // it.only('should be able to open related item', () => {
-
-    //     //click on product
-    //     cy.get(productDetailsPage.productQualityHatImageHomePage).click();
-    //     //assert url is product details url
-    //     cy.url().should('include', routesData.routes.productDetail);
-    //     //click on related image
-    //     cy.get(productDetailsPage.productRelatedImage).click();
-
-    //     //verify redirected url
-    // });
-
     it('is able to go back to products page from product details page', () => {
 
         //click on product

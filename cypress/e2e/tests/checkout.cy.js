@@ -16,13 +16,14 @@ describe("Verify that the user ", ()=>{
         Authentication.login(loginData.login.email, loginData.login.password);
     });
 
-	it("is not able to checkout with invalid information", ()=>{
+	it.only("is not able to checkout with invalid information", ()=>{
 
 		const productNumber = Math.round(Math.random()*22)
 		addToCartPage.addToCart(productNumber);
 
 		cy.get(addToCartPage.cartSummaryQuantity).should('have.text', 1);
-		cy.get(addToCartPage.getCartSummaryItemName(1)).should('contain', productsData.productsList[productNumber].name);
+		cy.get(addToCartPage.getCartSummaryItemName(1)).should('contain', 
+		productsData.productsList[productNumber].name);
 
 		cy.get(CheckoutPage.btnCheckout).click();
 

@@ -1,4 +1,4 @@
-class Cart{
+class CheckoutPage{
 
 	get btnCheckout(){
 		return ('.snipcart-cart__footer-buttons button.snipcart-button-primary')
@@ -45,7 +45,7 @@ class Cart{
 	}
 	
 	get emailError(){
-		return ('#snipcart-billing-form .snipcart-form__set:nth-child(2) .snipcart-form__field:nth-child(2) .snipcart-field-error')
+		return ('input[name="email"]');
 	}
 
 	get cityError(){
@@ -111,4 +111,4 @@ class Cart{
 		cy.get(this.provinceText).type(province);
 	}
 }
-export default new Cart();
+export default new CheckoutPage();

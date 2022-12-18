@@ -30,7 +30,7 @@ describe('Verify that the user ', () => {
         cy.get(addToCartPage.cartSummaryPrice).should('contain', productsData.productsList[1].price);
     });
 
-    it.only('is able to add multiple items to cart', () => {
+    it('is able to add multiple items to cart', () => {
 
         //check if url is products url
         cy.url().should('include', routesData.routes.products);
