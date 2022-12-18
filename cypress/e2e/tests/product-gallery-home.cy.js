@@ -3,7 +3,7 @@ import loginData from '../data/authentication.data';
 import routesData from '../data/routes.data';
 import Authentication from '../pageObjects/authentication.page';
 
-describe('The User', () => {
+describe('Verify that the user', () => {
 
     //this hook runs before each test
     beforeEach(() => {
@@ -12,7 +12,7 @@ describe('The User', () => {
         Authentication.login(loginData.login.email, loginData.login.password);
     });
 
-    it('should be able to visit the contact page', () => {
+    it('is able to visit the contact page from products page', () => {
 
         //check if url is products url
         cy.url().should('include', routesData.routes.products);
@@ -23,7 +23,7 @@ describe('The User', () => {
 
     });
 
-    it('should be able to visit the about page', () => {
+    it('is able to visit the about page from products page', () => {
 
         //check if url is products url
         cy.url().should('include', routesData.routes.products);
@@ -31,7 +31,7 @@ describe('The User', () => {
         cy.get(productGalleryPage.btnAbout).click();
     });
 
-    it('should be able to signout', () => {
+    it('is able to signout from products page', () => {
 
         //check if url is products url
         cy.url().should('include', routesData.routes.products);
