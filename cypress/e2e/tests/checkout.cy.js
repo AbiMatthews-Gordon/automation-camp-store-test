@@ -1,5 +1,5 @@
 import CheckoutPage from '../pageObjects/checkout.page.js'
-import {billingAddress, invalidCreditCard, creditCard} from '../data/checkout.data.json'
+import {billingAddress, invalidCreditCard, creditCard, billingError} from '../data/checkout.data.json'
 import Authentication from '../pageObjects/authentication.page';
 import loginData from '../data/authentication.data';
 import addToCartPage from '../pageObjects/add-to-cart.page';
@@ -18,7 +18,7 @@ describe("Verify that the user ", ()=>{
 
 	it("is not able to checkout with invalid information", ()=>{
 
-		const productNumber = Math.round(Math.random()*22)
+		const productNumber = Math.round(Math.random()*21)
 		addToCartPage.addToCart(productNumber);
 
 		cy.get(addToCartPage.cartSummaryQuantity).should('have.text', 1);
@@ -30,16 +30,16 @@ describe("Verify that the user ", ()=>{
 		cy.get(CheckoutPage.btnContinuePayment).click();
 
 		cy.get(CheckoutPage.emailError).should('be.visible');
-		cy.get(CheckoutPage.emailError).should('contain', billingAddress.error.email);
+		cy.get(CheckoutPage.emailError).should('contain', billingError.email);
 
 		cy.get(CheckoutPage.cityError).should('be.visible');
-		cy.get(CheckoutPage.cityError).should('contain', billingAddress.error.city);
+		cy.get(CheckoutPage.cityError).should('contain', billingError.city);
 
 		cy.get(CheckoutPage.countryError).should('be.visible');
-		cy.get(CheckoutPage.countryError).should('contain', billingAddress.error.country);
+		cy.get(CheckoutPage.countryError).should('contain', billingError.country);
 
 		cy.get(CheckoutPage.zipCodeError).should('be.visible');
-		cy.get(CheckoutPage.zipCodeError).should('contain', billingAddress.error.postalcode);
+		cy.get(CheckoutPage.zipCodeError).should('contain', billingError.postalcode);
 	});
 
 	it("is able to checkout with valid information", () => {

@@ -11,8 +11,7 @@
 		"postalcode": "00000"
 	},
 
-	"error":{
-
+	"billingError":{
 		"email": "This field is required", 
 		"city": "This field is required", 
 		"country": "This field is required", 

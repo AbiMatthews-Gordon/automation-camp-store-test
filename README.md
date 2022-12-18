@@ -72,6 +72,32 @@ Examples
     npx cypress run --reporter mochawesome
 ```
 * To execute individual tests in mochawesome
-
+```bash
+    npx cypress run --spec cypress/e2e/tests/cart.cy.js --reporter mochawesome
+```
+```bash
+    npx cypress run --spec cypress/e2e/tests/search.cy.js --reporter mochawesome
+```
+```bash
+    npx cypress run --spec cypress/e2e/tests/contact.cy.js --reporter mochawesome
+```
+```bash
+    npx cypress run --spec cypress/e2e/tests/checkout.cy.js --reporter mochawesome
+```
+```bash
+    npx cypress run --spec cypress/e2e/tests/add-to-cart.cy.js --reporter mochawesome
+```
+```bash
+    npx cypress run --spec cypress/e2e/tests/authentication.cy.js --reporter mochawesome
+```
+```bash
+    npx cypress run --spec cypress/e2e/tests/filter-and-sort.cy.js --reporter mochawesome
+```
+```bash
+    npx cypress run --spec cypress/e2e/tests/product-details.cy.js --reporter mochawesome
+```
+```bash
+    npx cypress run --spec cypress/e2e/tests/product-gallery-home.cy.js --reporter mochawesome
+```
 
 

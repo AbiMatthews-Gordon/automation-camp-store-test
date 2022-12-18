@@ -45,7 +45,7 @@ class CheckoutPage{
 	}
 	
 	get emailError(){
-		return ('input[name="email"]');
+		return ('#snipcart-billing-form > .snipcart__box > fieldset:nth-child(2) .snipcart-form__field:nth-child(2) .snipcart-field-error');
 	}
 
 	get cityError(){
