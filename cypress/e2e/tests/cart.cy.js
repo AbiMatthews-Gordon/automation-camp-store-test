@@ -4,7 +4,7 @@ import addToCartPage from '../pageObjects/add-to-cart.page';
 import routesData from '../data/routes.data';
 import productsData from '../data/products.data.json';
 
-describe('The User', () => {
+describe('Verify that the user', () => {
 
     //this hook runs before each test
     beforeEach(() => {
@@ -13,7 +13,7 @@ describe('The User', () => {
         Authentication.login(loginData.login.email, loginData.login.password);
     });
 
-    it('should be able to increase item quantity from cart summary', () => {
+    it('is able to increase item quantity from cart summary', () => {
 
         //check if url is products url
         cy.url().should('include', routesData.routes.products);
@@ -34,7 +34,7 @@ describe('The User', () => {
         cy.get(addToCartPage.cartSummaryPrice).should('contain', Number(productsData.productsList[1].price.replace("$", ""))*2);
     });
 
-    it('should be able to decrease item quantity from cart summary', () => {
+    it('is able to decrease item quantity from cart summary', () => {
 
         //check if url is products url
         cy.url().should('include', routesData.routes.products);
@@ -59,7 +59,7 @@ describe('The User', () => {
         cy.get(addToCartPage.cartSummaryPrice).should( 'contain', Number(productsData.productsList[1].price.replace("$", "")) );
     });
 
-    it('should be able to go back to products', () => {
+    it('is able to go back to products page from the cart summary page', () => {
 
         //check url is products url
         cy.url().should('include', routesData.routes.products);
