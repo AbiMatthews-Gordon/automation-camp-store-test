@@ -7,7 +7,7 @@ import routesData from '../data/routes.data';
 import productsData from '../data/products.data.json';
 
 
-describe("The user", ()=>{
+describe("Verify that the user ", ()=>{
 
     //this hook runs before each test
     beforeEach(() => {
@@ -16,7 +16,7 @@ describe("The user", ()=>{
         Authentication.login(loginData.login.email, loginData.login.password);
     });
 
-	it.only("should not allow checkout with invalid information", ()=>{
+	it("is not able to checkout with invalid information", ()=>{
 
 		const product_id = Math.round(Math.random()*22)
 		addToCartPage.addToCart(product_id);
@@ -40,7 +40,7 @@ describe("The user", ()=>{
 		cy.get(CheckoutPage.shippingPostalCodeError).should('contain', checkoutInfo.error.postalcode);
 	});
 
-	it("should not allow checkout with invalid payment information", ()=>{
+	it("is not able to checkout with invalid payment information", ()=>{
         //set view port to avoid overlapping elements
 		cy.viewport(1920, 1080);
 		//get random product number
@@ -67,7 +67,7 @@ describe("The user", ()=>{
 		cy.url().should('not.contain', 'order');
 	});
 
-	it("should checkout with valid information", () => {
+	it("is able to checkout with valid information", () => {
 
 		cy.viewport(1920, 1080);
 		const product_id = Math.round(Math.random()*22)
