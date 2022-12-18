@@ -4,7 +4,7 @@ import routesData from '../data/routes.data';
 import productsData from '../data/products.data.json';
 import productDetailsPage from '../pageObjects/product-details.page';
 
-describe('The User', () => {
+describe('Verify that the user ', () => {
 
     //this hook runs before each test
     beforeEach(() => {
@@ -13,7 +13,7 @@ describe('The User', () => {
         Authentication.login(loginData.login.email, loginData.login.password);
     });
 
-    it('should be able to open product detail page', () => {
+    it('is be able to open the product detail page', () => {
 
         //click on product
         cy.get(productDetailsPage.productQualityHatImageHomePage).click();
@@ -23,7 +23,7 @@ describe('The User', () => {
         cy.get(productDetailsPage.productTitle).should('contain', productsData.productsList[0].name)
     });
 
-    it('should be able to view product images', () => {
+    it('is able to view product images', () => {
 
         //click on product
         cy.get(productDetailsPage.productQualityHatImageHomePage).click();
@@ -47,7 +47,7 @@ describe('The User', () => {
     //     //verify redirected url
     // });
 
-    it('should be able to go back to products', () => {
+    it('is able to go back to products page from product details page', () => {
 
         //click on product
         cy.get(productDetailsPage.productQualityHatImageHomePage).click();
