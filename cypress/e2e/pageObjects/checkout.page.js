@@ -1,70 +1,70 @@
 class Cart{
 
-	get checkoutBtn(){
+	get btnCheckout(){
 		return ('.snipcart-cart__footer-buttons button.snipcart-button-primary')
 	}
 
-	get continuePaymentBtn(){
+	get btnContinuePayment(){
 		return ('.snipcart-form__footer button[type=submit]')
 	}
 
-	get shippingMethodsHead(){
+	get shippingMethodsHeader(){
 		return ('snipcart-featured-payment-methods h3')
 	}
 
-	get shippingMethodsHead(){
+	get shippingMethodsHeader(){
 		return ('snipcart-featured-payment-methods h3')
 	}
 
-	get shippingNameTxt(){
+	get nameText(){
 		return ('#snipcart-billing-form input[name=name]')
 	}
 
-	get shippingEmailTxt(){
+	get emailText(){
 		return ('#snipcart-billing-form input[name=email]')
 	}
 
-	get shippingEmailError(){
-		return ('#snipcart-billing-form .snipcart-form__set:nth-child(2) .snipcart-form__field:nth-child(2) .snipcart-field-error')
-	}
-
-	get shippingStreetTxt(){
+	get streetText(){
 		return ('#snipcart-billing-form input[name=address1]')
 	}
-
-	get shippingAptTxt(){
+	
+	get aptText(){
 		return ('#snipcart-billing-form input[name=address2]')
 	}
-
-	get shippingCityTxt(){
+	
+	get cityText(){
 		return ('#snipcart-billing-form input[name=city]')
 	}
-
-	get shippingCityError(){
-		return ('#snipcart-billing-form > .snipcart__box > div:nth-child(3) .snipcart-form__set .snipcart-form__field:nth-child(2) .snipcart-field-error')
-	}
-
-	get shippingCountrySelect(){
+	
+	get countryDropdown(){
 		return ('#snipcart-billing-form select[name=country]')
 	}
 
-	get shippingCountryTxt(){
+	get countryText(){
 		return ('#snipcart-billing-form > div.snipcart__box > div:nth-child(3)  .snipcart-form__set div.snipcart-form__field:nth-child(3)')
 	}
+	
+	get emailError(){
+		return ('#snipcart-billing-form .snipcart-form__set:nth-child(2) .snipcart-form__field:nth-child(2) .snipcart-field-error')
+	}
 
-	get shippingCountryError(){
+	get cityError(){
+		return ('#snipcart-billing-form > .snipcart__box > div:nth-child(3) .snipcart-form__set .snipcart-form__field:nth-child(2) .snipcart-field-error')
+	}
+
+	get countryError(){
 		return ('#snipcart-billing-form > .snipcart__box > div:nth-child(3) .snipcart-form__set .snipcart-form__field:nth-child(3) .snipcart-field-error')
 	}
 
-	get shippingProvinceTxt(){
+	get provinceText(){
 		return ('#snipcart-billing-form input[name=province]')
 	}
 
-	get shippingPostalCodeTxt(){
+	get zipCodeText(){
 		return ('#snipcart-billing-form input[name=postalCode]')
 	}
 
-	get shippingPostalCodeError(){
+	get zipCodeError(){
 		return ('#snipcart-billing-form > .snipcart__box > div:nth-child(3) .snipcart-form__set .snipcart-form__row:nth-child(4) .snipcart-field-error')
 	}
 
@@ -72,15 +72,15 @@ class Cart{
 		return ('.snipcart-summary-fees__total .snipcart-summary-fees__amount')
 	}
 
-	get checkoutOrderInvoiceNumber(){
+	get invoiceNumber(){
 		return ('div.snipcart-order__invoice-number .snipcart-order__invoice-number--highlight')
 	}
 
-	get checkoutOrderInvoiceCard(){
+	get invoiceCreditCard(){
 		return ('div.snipcart-order__card')
 	}
 
-	get checkoutOrderInvoiceAddress(){
+	get invoiceAddress(){
 		return ('div.snipcart-billing-completed .snipcart-checkout-step__col:nth-child(2) .snipcart-billing-completed__information')
 	}
 
@@ -100,15 +100,15 @@ class Cart{
 		return `ul.snipcart-cart-summary-items-list .snipcart-cart-summary-expanded-item:nth-child(${itemNumber}) >div:nth-child(3) `
 	}
 
-	fillShippingForm(name, email, apt, city, province, postalCode){
-		cy.get(this.shippingNameTxt).type(name);
-		cy.get(this.shippingEmailTxt).type(email);
-		cy.get(this.shippingAptTxt).type(apt);
-		cy.get(this.shippingCityTxt).type(city);
-		cy.get(this.shippingPostalCodeTxt).type(postalCode);
-		cy.get(this.shippingCountryTxt).type("Jamaica{downArrow}{enter}");
-		cy.wait(500);
-		cy.get(this.shippingProvinceTxt).type(province);
+	fillShippingForm(name, email, street, apt, city, country, province, postalCode){
+		cy.get(this.nameText).type(name);
+		cy.get(this.emailText).type(email);
+		cy.get(this.aptText).type(apt);
+		cy.get(this.cityText).type(city);
+		cy.get(this.zipCodeText).type(postalCode);
+		cy.get(this.countryText).type("Jamaica{downArrow}{enter}");
+		cy.wait(1500);
+		cy.get(this.provinceText).type(province);
 	}
 }
 export default new Cart();
