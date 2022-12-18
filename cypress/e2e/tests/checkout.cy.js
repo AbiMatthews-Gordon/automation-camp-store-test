@@ -1,5 +1,5 @@
 import CheckoutPage from '../pageObjects/checkout.page.js'
-import checkoutInfo from '../data/checkout.data.json'
+import {billingAddress, invalidCreditCard, creditCard} from '../data/checkout.data.json'
 import Authentication from '../pageObjects/authentication.page';
 import loginData from '../data/authentication.data';
 import addToCartPage from '../pageObjects/add-to-cart.page';
@@ -18,91 +18,71 @@ describe("Verify that the user ", ()=>{
 
 	it("is not able to checkout with invalid information", ()=>{
 
-		const product_id = Math.round(Math.random()*22)
-		addToCartPage.addToCart(product_id);
-		cy.get(addToCartPage.cartCount).should('contain', 1);
-		cy.get(addToCartPage.getCartSummaryItemName(1)).should('contain', productsData.productsList[product_id].name);
+		const productNumber = Math.round(Math.random()*22)
+		addToCartPage.addToCart(productNumber);
 
-		cy.get(CheckoutPage.checkoutBtn).click();
+		cy.get(addToCartPage.cartSummaryQuantity).should('have.text', 1);
+		cy.get(addToCartPage.getCartSummaryItemName(1)).should('contain', productsData.productsList[productNumber].name);
 
-		cy.get(CheckoutPage.continuePaymentBtn).click();
+		cy.get(CheckoutPage.btnCheckout).click();
 
-		cy.get(CheckoutPage.shippingEmailError).should('be.visible');
-		cy.get(CheckoutPage.shippingEmailError).should('contain', checkoutInfo.error.email);
+		cy.get(CheckoutPage.btnContinuePayment).click();
 
-		cy.get(CheckoutPage.shippingCityError).should('be.visible');
-		cy.get(CheckoutPage.shippingCityError).should('contain', checkoutInfo.error.city);
+		cy.get(CheckoutPage.emailError).should('be.visible');
+		cy.get(CheckoutPage.emailError).should('contain', billingAddress.error.email);
 
-		cy.get(CheckoutPage.shippingCountryError).should('be.visible');
-		cy.get(CheckoutPage.shippingCountryError).should('contain', checkoutInfo.error.country);
+		cy.get(CheckoutPage.cityError).should('be.visible');
+		cy.get(CheckoutPage.cityError).should('contain', billingAddress.error.city);
 
-		cy.get(CheckoutPage.shippingPostalCodeError).should('be.visible');
-		cy.get(CheckoutPage.shippingPostalCodeError).should('contain', checkoutInfo.error.postalcode);
-	});
+		cy.get(CheckoutPage.countryError).should('be.visible');
+		cy.get(CheckoutPage.countryError).should('contain', billingAddress.error.country);
 
-	it("is not able to checkout with invalid payment information", ()=>{
-        //set view port to avoid overlapping elements
-		cy.viewport(1920, 1080);
-		//get random product number
-        const product_id = Math.round(Math.random()*22)
-		addToCartPage.addToCart(product_id);
-
-		cy.get(addToCartPage.getCartSummaryItemName(1)).should('contain', productsData.productsList[product_id].name);
-
-		cy.get(CheckoutPage.checkoutBtn).click();
-
-		CheckoutPage.fillShippingForm(checkoutInfo.name, checkoutInfo.email, checkoutInfo.street, checkoutInfo.apt, checkoutInfo.city, checkoutInfo.country, checkoutInfo.province, checkoutInfo.postalcode);
-
-		cy.get(CheckoutPage.continuePaymentBtn).scrollIntoView();
-		cy.get(CheckoutPage.continuePaymentBtn).click();
-
-		cy.iframe('.snipcart-payment-card-form iframe').find('#card-number').should('be.visible')
-        cy.iframe('.snipcart-payment-card-form iframe').find('#card-number').type(checkoutInfo.invalid_card.number)
-        cy.iframe('.snipcart-payment-card-form iframe').find('#expiry-date').type(checkoutInfo.invalid_card.expiry)
-        cy.iframe('.snipcart-payment-card-form iframe').find('#cvv').type(checkoutInfo.invalid_card.cvc)
-
-		cy.get(CheckoutPage.continuePaymentBtn).click();
-
-		cy.wait(6000);
-		cy.url().should('not.contain', 'order');
+		cy.get(CheckoutPage.zipCodeError).should('be.visible');
+		cy.get(CheckoutPage.zipCodeError).should('contain', billingAddress.error.postalcode);
 	});
 
 	it("is able to checkout with valid information", () => {
 
 		cy.viewport(1920, 1080);
-		const product_id = Math.round(Math.random()*22)
-		addToCartPage.addToCart(product_id);
+		addToCartPage.addToCart(2);
 
-		cy.get(addToCartPage.getCartSummaryItemName(1)).should('contain', productsData.productsList[product_id].name);
+		cy.get(addToCartPage.getCartSummaryItemName(1)).should('contain', productsData.productsList[2].name);
 
-		cy.get(CheckoutPage.checkoutBtn).click();
+		cy.get(CheckoutPage.btnCheckout).click();
 
-		CheckoutPage.fillShippingForm(checkoutInfo.name, checkoutInfo.email, checkoutInfo.street, checkoutInfo.apt, checkoutInfo.city, checkoutInfo.country, checkoutInfo.province, checkoutInfo.postalcode);
+		CheckoutPage.fillShippingForm(billingAddress.name, 
+			billingAddress.email, 
+			billingAddress.street, 
+			billingAddress.apt, 
+			billingAddress.city, 
+			billingAddress.country, 
+			billingAddress.province, 
+			billingAddress.postalcode
+		);
 
-		cy.get(CheckoutPage.continuePaymentBtn).scrollIntoView();
-		cy.get(CheckoutPage.continuePaymentBtn).click();
+		cy.get(CheckoutPage.btnContinuePayment).scrollIntoView();
+		cy.get(CheckoutPage.btnContinuePayment).click();
 
 		cy.iframe('.snipcart-payment-card-form iframe').find('#card-number').should('be.visible')
-        cy.iframe('.snipcart-payment-card-form iframe').find('#card-number').type(checkoutInfo.card.number)
-        cy.iframe('.snipcart-payment-card-form iframe').find('#expiry-date').type(checkoutInfo.card.expiry)
-        cy.iframe('.snipcart-payment-card-form iframe').find('#cvv').type(checkoutInfo.card.cvc)
+        cy.iframe('.snipcart-payment-card-form iframe').find('#card-number').type(creditCard.number)
+        cy.iframe('.snipcart-payment-card-form iframe').find('#expiry-date').type(creditCard.expiry)
+        cy.iframe('.snipcart-payment-card-form iframe').find('#cvv').type(creditCard.cvc)
 		
 		// check total
-		cy.get(CheckoutPage.checkoutTotal).should('contain', `$${productsData[product_id].price.toLocaleString("en-US")}`)
+		cy.get(CheckoutPage.checkoutTotal).should('contain', `${productsData.productsList[2].price}`)
 		
-		cy.get(CheckoutPage.continuePaymentBtn).click();
-		cy.get(CheckoutPage.continuePaymentBtn).click();
-		cy.wait(6000);
+		cy.get(CheckoutPage.btnContinuePayment).click();
+		cy.wait(4000);
 		
 		// check invoice number
-		cy.get(CheckoutPage.checkoutOrderInvoiceNumber).should('be.visible');
+		cy.get(CheckoutPage.invoiceNumber).should('be.visible');
 
 		// check address
-		cy.get(CheckoutPage.checkoutOrderInvoiceAddress).should('be.visible');
-		cy.get(CheckoutPage.checkoutOrderInvoiceAddress).should('contain', `${checkoutInfo.apt}, ${checkoutInfo.city}, ${checkoutInfo.province}, JM, ${checkoutInfo.postalcode}`);
+		cy.get(CheckoutPage.invoiceAddress).should('be.visible');
+		cy.get(CheckoutPage.invoiceAddress).should('contain', `${billingAddress.apt}, ${billingAddress.city}, ${billingAddress.province}, JM, ${billingAddress.postalcode}`);
 
 		// check cardinfo
-		cy.get(CheckoutPage.checkoutOrderInvoiceCard).should('be.visible');
-		cy.get(CheckoutPage.checkoutOrderInvoiceCard).should('contain', checkoutInfo.card.number.substring(checkoutInfo.card.number.length-4, checkoutInfo.card.number.length));
+		cy.get(CheckoutPage.invoiceCreditCard).should('be.visible');
+		cy.get(CheckoutPage.invoiceCreditCard).should('contain', creditCard.number.substring(creditCard.number.length-4, creditCard.number.length));
 	});
 });

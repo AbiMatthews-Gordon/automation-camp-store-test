@@ -1,5 +1,5 @@
 {
-	"billing_address":{
+	"billingAddress":{
         
 		"name": "Jon Dow", 
 		"email": "email1@qualityw.jm", 
@@ -19,14 +19,14 @@
 		"postalcode": "This field is required"
 	},
 
-	"card":{
+	"creditCard":{
 
-		"number": "4487937368330376",
-		"cvc": "940",
-		"expiry": "07/30"
+		"number": "4241173873683303",
+		"cvc": "456",
+		"expiry": "09/26"
 	},
 
-	"invalid_card":{
+	"invalidCreditCard":{
 
 		"number": "4487938330376",
 		"cvc": "90",
