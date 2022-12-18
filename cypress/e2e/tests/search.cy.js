@@ -4,7 +4,7 @@ import { productsList } from '../data/products.data.json';
 import addToCartPage from '../pageObjects/add-to-cart.page';
 import routesData from '../data/routes.data';
 
-describe('Sort', () => {
+describe('Verify that the user', () => {
 
     beforeEach(() => {
 
@@ -13,7 +13,7 @@ describe('Sort', () => {
         Authentication.login(loginData.login.email, loginData.login.password);
     });
 
-    it('should be able to search by name', () => {
+    it('is able to search for a product by name ', () => {
 
         //check if url is products url
         cy.url().should('include', routesData.routes.products);
@@ -26,7 +26,7 @@ describe('Sort', () => {
 
     });
 
-    it('should be able to search by category', () => {
+    it('is able to search for a product by category', () => {
 
         //check if url is products url
         cy.url().should('include', routesData.routes.products);
@@ -40,7 +40,7 @@ describe('Sort', () => {
         cy.get(addToCartPage.qualityTruckerHat).should('have.text', productsList[1].name);
     });
 
-    it('should not be able to search by price', () => {
+    it('is not able to search for a product by price', () => {
 
         //check if url is products url
         cy.url().should('include', routesData.routes.products);
