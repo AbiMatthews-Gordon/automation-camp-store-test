@@ -69,7 +69,7 @@ class Contact{
     }
 
     get confirmationMessage(){
-        return ('.css-njbp03');
+        return ('#chakra-toast-manager-bottom .chakra-toast');
     }
 
     contactForm(firstname, lastname, email, subject, message){

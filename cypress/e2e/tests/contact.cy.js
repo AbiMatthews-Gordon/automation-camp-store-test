@@ -5,7 +5,7 @@ const {faker} = require('@faker-js/faker');
 import routesData from '../data/routes.data';
 import contactData from '../data/contact.data';
 
-describe('The user', () => {
+describe('Verify that the user', () => {
 
     //this hook runs before each test
     beforeEach(() => {
@@ -15,7 +15,7 @@ describe('The user', () => {
         Authentication.login(loginData.login.email, loginData.login.password);
     });
 
-    it('should submit contact form successfully', () => {
+    it('is able to submit contact form successfully', () => {
 
         // //check that url is products url
         cy.url().should('include', routesData.routes.products);
@@ -30,11 +30,11 @@ describe('The user', () => {
         contact.contactForm(faker.name.firstName(), faker.name.lastName(), faker.internet.email(),
                             contactData.contacts.subject, contactData.contacts.message);
 
-        // //check the confirmation message
-        // cy.get(contact.confirmationMessage).should('have.text', contactData.contacts.confirmationMessageOne)
+        //check the confirmation message
+        cy.get(contact.confirmationMessage).should('contain', contactData.contacts.confirmationMessage);
     });
 
-    it('should not submit with missing firstname', () => {
+    it('is not able to submit contact form with missing firstname input', () => {
 
         // //check that url is products url
         cy.url().should('include', routesData.routes.products);
@@ -55,7 +55,7 @@ describe('The user', () => {
 
     });
 
-    it('should not submit with missing lastname', () => {
+    it('is not able to submit contact form with missing lastname input', () => {
 
         // //check that url is products url
         cy.url().should('include', routesData.routes.products);
@@ -74,7 +74,7 @@ describe('The user', () => {
         cy.get(contact.lastnameErrorMessage).should('have.text', contactData.contacts.errorMessage);
     });
 
-    it('should not submit with missing email, subject & message', () => {
+    it('is not able to submit contact form with missing email, subject & message inputs', () => {
 
         // //check that url is products url
         cy.url().should('include', routesData.routes.products);
@@ -97,7 +97,7 @@ describe('The user', () => {
         cy.get(contact.messageErrorMessage).should('have.text', contactData.contacts.errorMessage);
     });
 
-    it('should see various contact methods', () => {
+    it('is able to see other contact methods (Linkedin, Twitter & email)', () => {
 
         // //check that url is products url
         cy.url().should('include', routesData.routes.products);
