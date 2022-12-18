@@ -16,7 +16,7 @@ describe("Verify that the user ", ()=>{
         Authentication.login(loginData.login.email, loginData.login.password);
     });
 
-	it.only("is not able to checkout with invalid information", ()=>{
+	it("is not able to checkout with invalid information", ()=>{
 
 		const productNumber = Math.round(Math.random()*22)
 		addToCartPage.addToCart(productNumber);

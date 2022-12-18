@@ -10,5 +10,11 @@ module.exports = defineConfig({
     defaultCommandTimeout: 15000,
   },
   chromeWebSecurity: false,
-  reporter: 'mochawesome'
+  reporter: 'mochawesome',
+  reporterOptions: {
+    reportDir: 'cypress/results',
+    overwrite: false,
+    html: false,
+    json: true
+  }
 });

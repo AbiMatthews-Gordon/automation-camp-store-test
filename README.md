@@ -12,7 +12,7 @@ This is a Cypress Test Automation project for the Automation Camp Store website,
 * Product details
 * Product gallery home page
 
-It also includes Data-Driven Tests, Negative Tests, Sorts and the Allure reporter.
+It also includes Data-Driven Tests, Negative Tests, Sorts and the Mochaawesome reporter.
 
 ---
 
@@ -63,4 +63,15 @@ Examples
 ```bash
     npx cypress open
 ```
+
+---
+## Reporter
+
+* To execute tests in Mochawesome reporter
+```bash
+    npx cypress run --reporter mochawesome
+```
+* To execute individual tests in mochawesome
+
+
 
