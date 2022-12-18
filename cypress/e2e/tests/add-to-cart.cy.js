@@ -30,7 +30,7 @@ describe('Verify that the user ', () => {
         cy.get(addToCartPage.cartSummaryPrice).should('contain', productsData.productsList[1].price);
     });
 
-    it('is able to add multiple items to cart', () => {
+    it.only('is able to add multiple items to cart', () => {
 
         //check if url is products url
         cy.url().should('include', routesData.routes.products);
@@ -44,21 +44,27 @@ describe('Verify that the user ', () => {
         //and adding them to cart
         //and checking if that the item is added to cart
         for(let i = 0; i < 5; i++){
+
             let randomNumber = Math.round(Math.random()*22);
+
             while(true){
-                if(!productsNumbers.includes(randomNumber)){
+
+                if(!productsNumbers.includes(randomNumber)) {
+
                     productsNumbers.push(randomNumber);
                     break;
                 }
             }
+
             addToCartPage.addToCart(randomNumber);
             cy.get(addToCartPage.getCartSummaryItemName(1)).should('contain', productsData.productsList[randomNumber].name);
             cartTotal += Number(productsData.productsList[randomNumber].price.replace("$", ""));
-            if(i<4){
+            
+            if(i < 4){
                 cy.get(addToCartPage.continueShopping).click();
             }
         }
-        // check quantity
+        //check quantity
         cy.get(addToCartPage.cartTotalQuantity).should('have.text', ` 5 `);
         //check price
         cy.get(addToCartPage.cartSummaryPriceTotal).should('contain', `$${cartTotal}`);

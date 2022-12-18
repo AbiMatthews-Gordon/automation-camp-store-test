@@ -9,5 +9,6 @@ module.exports = defineConfig({
     specPattern: 'cypress/e2e/tests/**/*.cy.{js,jsx,ts,tsx}',
     defaultCommandTimeout: 15000,
   },
-  chromeWebSecurity: false
+  chromeWebSecurity: false,
+  reporter: 'mochawesome'
 });
