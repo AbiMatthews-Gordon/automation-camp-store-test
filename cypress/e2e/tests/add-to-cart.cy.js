@@ -5,7 +5,7 @@ import { login } from '../data/authentication.data';
 import routesData from '../data/routes.data';
 import productsData from '../data/products.data.json';
 
-describe('The User', () => {
+describe('Verify that the user ', () => {
 
     //this hook runs before each test
     beforeEach(() => {
@@ -15,7 +15,7 @@ describe('The User', () => {
     });
 
     //adding a single item to cart
-    it('should be able to add a single item to cart', () => {
+    it('is able to add a single item to cart', () => {
 
         //check if url is products url
         cy.url().should('include', routesData.routes.products);
@@ -31,7 +31,7 @@ describe('The User', () => {
         cy.get(addToCartPage.cartSummaryPrice).should('contain', productsData.productsList[1].price);
     });
 
-    it('should be able to add multiple items to cart', () => {
+    it('is able to add multiple items to cart', () => {
 
         //check if url is products url
         cy.url().should('include', routesData.routes.products);
@@ -65,7 +65,7 @@ describe('The User', () => {
         cy.get(addToCartPage.cartSummaryPriceTotal).should('contain', `$${cartTotal}`);
     });
 
-    it('should be able to remove an item from cart', () => {
+    it('is able to remove an item from cart', () => {
 
         //check if url is products url
         cy.url().should('include', routesData.routes.products);
